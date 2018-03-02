@@ -38,8 +38,7 @@
     "updateLatest": "./scripts/updateLatest.sh",
     "lint": "jshint src",
     "validate": "npm ls",
-    "start": "forever start test/index.js",
-    "stop": "forever stopall"
+    "start": "node test/index.js"
   },
   "pre-commit": [
     "lint",

@@ -38,7 +38,7 @@
     "updateLatest": "./scripts/updateLatest.sh",
     "lint": "jshint src",
     "validate": "npm ls",
-    "start": "node test/index.js"
+    "start": "node test/selenium/index.js"
   },
   "pre-commit": [
     "lint",

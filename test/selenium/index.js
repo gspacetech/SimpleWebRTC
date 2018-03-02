@@ -29,3 +29,4 @@ var path = require('path');
   });
     server.listen(port); 
     console.log('Server running at http://127.0.0.1:8081/'+ port);
+console.log('path'+ path.normalize(__dirname,'/../test')+"/index.html");

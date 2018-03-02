@@ -20,10 +20,15 @@ function WebRTC(opts) {
      // 'username': '28224511:1379330808'
    // },
     {
-      'urls': 'turn:turn.anyfirewall.com:443?transport=tcp',
-      'credential': 'webrtc',
-      'username': 'webrtc'
-    }
+    url: 'turn:turn.bistri.com:80',
+    credential: 'homeo',
+    username: 'homeo'
+ },
+ {
+    url: 'turn:turn.anyfirewall.com:443?transport=tcp',
+    credential: 'webrtc',
+    username: 'webrtc'
+}
                 ]
             },
             peerConnectionConstraints: {

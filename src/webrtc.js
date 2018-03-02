@@ -20,7 +20,7 @@ function WebRTC(opts) {
      // 'username': '28224511:1379330808'
    // },
                     
-                    {url:'stun:stun.ekiga.net'}
+                    {url:'stun:stun.voiparound.com'}
 //     {urls: ["turn:173.194.72.127:19305?transport=udp",
 //        "turn:[2404:6800:4008:C01::7F]:19305?transport=udp",
 //        "turn:173.194.72.127:443?transport=tcp",

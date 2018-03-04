@@ -32,6 +32,8 @@ function WebRTC(opts) {
 //     {urls:["stun:stun.l.google.com:19302"]}
                     
                      { url: 'stun:stun.l.google.com:19302' },
+                    { url: 'stun:stun4.l.google.com:19302' },
+                    { url: 'stun:stun.stunprotocol.org:3478' },
     { url: 'turn:homeo@turn.bistri.com:80', credential: 'homeo' }
                 ]
             },

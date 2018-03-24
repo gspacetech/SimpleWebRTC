@@ -91,11 +91,13 @@ var webrtc = new SimpleWebRTC({
             
 function senddatamsg(button) { 
     console.log('senddatamsg', "senddatamsgdewd");
-    webrtc.sendDirectlyToAll("channelMessage", "data", "test");
+    webrtc.sendDirectlyToAll("channelMessage", "data", "{
+                             type: "test gp"
+                             });
 }
             
 webrtc.on('channelMessage', function (peer, label, data) {
-    console.log('data channel', data.type);
+    console.log('data channel gp ', data.type+label);
 });
 
 // called when a peer is created

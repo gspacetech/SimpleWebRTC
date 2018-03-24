@@ -62,6 +62,8 @@ li .filename {
             <input id="sessionInput"/>
             <button disabled type="submit">Create it!</button>
         </form>
+        
+        <button id="a" onclick="senddatamsg(this)">Button A</button>
         <p id="subTitle"></p>
 
 
@@ -86,6 +88,11 @@ var webrtc = new SimpleWebRTC({
         offerToReceiveVideo: false
     }
 });
+            
+function senddatamsg(button) { 
+    console.log('senddatamsg', "senddatamsgdewd");
+    webrtc.sendDirectlyToAll("chat", "data", "test");
+}
 
 // called when a peer is created
 webrtc.on('createdPeer', function (peer) {

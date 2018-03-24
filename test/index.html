@@ -31,6 +31,11 @@
             <input id="sessionInput"/>
             <button type="submit">Create it!</button>
         </form>
+        
+<!--         <form id="sendtrcdatagp"> -->
+<!--             <input id="sessionInput1"/> -->
+            <button id="a" onclick="senddatamsg(this)">Button A</button>
+<!--         </form> -->
         <div class="videoContainer">
             <video id="localVideo" style="height: 150px;" oncontextmenu="return false;"></video>
             <div id="localVolume" class="volume_bar"></div>
@@ -39,20 +44,35 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script src="../out/simplewebrtc-with-adapter.bundle.js"></script>
         <script>
+            
+            
+            
+            
+            
+            
             // grab the room from the URL
             var room = location.search && location.search.split('?')[1];
 
             // create our webrtc connection
             var webrtc = new SimpleWebRTC({
                 // the id/element dom element that will hold "our" video
-                localVideoEl: 'localVideo',
+                //localVideoEl: 'localVideo',
+                localVideoEl: '',
                 // the id/element dom element that will hold remote videos
                 remoteVideosEl: '',
                 // immediately ask for camera access
-                autoRequestMedia: true,
-                debug: false,
-                detectSpeakingEvents: true
+                autoRequestMedia: false,
+                debug: true,
+                receiveMedia: {
+                    offerToReceiveAudio: 0,
+                    offerToReceiveVideo: 0
+                },
+                enableDataChannels: true
             });
+            
+            function senddatamsg(button) { 
+                webrtc.sendDirectlyToAll("chat", "data", "test");
+            }
 
             // when it's ready, join if we got a room from the URL
             webrtc.on('readyToCall', function () {
@@ -74,6 +94,8 @@
                 if (data.type == 'volume') {
                     showVolume(document.getElementById('volume_' + peer.id), data.volume);
                 }
+                
+                console.log('data channel', data.type);
             });
             webrtc.on('videoAdded', function (video, peer) {
                 console.log('video added', peer);

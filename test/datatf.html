@@ -104,7 +104,7 @@ function senddatamsg(button) {
 webrtc.on('channelMessage', function (peer, label, data) {
     
     var datamsg = JSON.parse(data.payload);
-    console.log('data channel gp ', data.type+" - "+datamsg);
+    console.log('data channel gp ', data.type+" - "+datamsg.type+" = "+datamsg.userid);
 });
 
 // called when a peer is created

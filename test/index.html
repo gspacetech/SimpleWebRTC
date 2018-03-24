@@ -74,6 +74,12 @@
                 console.log('senddatamsg', "senddatamsgdewd");
                 webrtc.sendDirectlyToAll("chat", "data", "test");
             }
+            
+            // called when a peer is created
+webrtc.on('createdPeer', function (peer) {
+    console.log('createdPeer', peer);
+if (room) webrtc.joinRoom(room);
+}
 
             // when it's ready, join if we got a room from the URL
             webrtc.on('readyToCall', function () {

@@ -78,6 +78,7 @@ var room = location.search && location.search.split('?')[1];
 // create our webrtc connection
 var webrtc = new SimpleWebRTC({
     // we don't do video
+    url: 'https://gsprtchgit-scotch.herokuapp.com',
     localVideoEl: '',
     remoteVideosEl: '',
     // dont ask for camera access
@@ -106,12 +107,7 @@ webrtc.on('channelMessage', function (peer, label, data) {
     var datamsg = JSON.parse(data.payload);
     console.log('data channel gp ', data.type+" - "+datamsg.type+" = "+datamsg.userid);
 });
-            
-webrtc.on('gameData', function (peer, label, data) {
-    
-    var datamsg = JSON.parse(data.payload);
-    console.log('gameData gp ', data.type+" - "+datamsg.type+" = "+datamsg.userid);
-});
+       
 
 // called when a peer is created
 webrtc.on('createdPeer', function (peer) {

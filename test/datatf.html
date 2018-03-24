@@ -91,9 +91,9 @@ var webrtc = new SimpleWebRTC({
             
 function senddatamsg(button) { 
     console.log('senddatamsg', "senddatamsgdewd");
-    webrtc.sendDirectlyToAll("channelMessage", "data", "{
+    webrtc.sendDirectlyToAll("channelMessage", "data", '{
                              type: "test gp"
-                             });
+                             }');
 }
             
 webrtc.on('channelMessage', function (peer, label, data) {

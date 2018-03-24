@@ -98,11 +98,13 @@ function senddatamsg(button) {
     };
     
     
-    webrtc.sendDirectlyToAll("channelMessage", "data", JSON.stringify(payloadmsg));
+    webrtc.sendDirectlyToAll("channelMessage", "game", JSON.stringify(payloadmsg));
 }
             
 webrtc.on('channelMessage', function (peer, label, data) {
-    console.log('data channel gp ', data.type+" - "+data.payload);
+    
+    var datamsg = JSON.parse(data.payload);
+    console.log('data channel gp ', data.type+" - "+datamsg);
 });
 
 // called when a peer is created

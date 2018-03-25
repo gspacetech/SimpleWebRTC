@@ -123,6 +123,8 @@ $("#send").click(sendMSG);
             // called when a peer is created
             webrtc.on('createdPeer', function (peer) {
                 console.log('createdPeer', peer);
+                $("textarea").attr("disabled",true);
+	            addMSG("CONNECTED!", "info")
             //if (room) webrtc.joinRoom(room);
             });
 

@@ -70,7 +70,7 @@ var sendMSG = function() {
       var payloadmsg = {
         type: 'msg',
         userid: '1234fg',
-        mag: value
+        msg: value
         };
         webrtc.sendDirectlyToAll("gameData", "game", JSON.stringify(payloadmsg));
     addMSG(value, "me");
@@ -115,7 +115,7 @@ $("#send").click(sendMSG);
                 var payloadmsg = {
                 type: 'msg',
                 userid: '1234fg',
-                mag: 'test msg gp'
+                msg: 'test msg gp'
                 };
                 webrtc.sendDirectlyToAll("gameData", "game", JSON.stringify(payloadmsg));
         }

@@ -40,6 +40,13 @@
             <video id="localVideo" style="height: 150px;" oncontextmenu="return false;"></video>
             <div id="localVolume" class="volume_bar"></div>
         </div>
+        <h3> CHAT </h3>
+        <div id="chat">
+            <div id="chat-screen-wp">
+            <div id="chat-screen"></div>
+        </div>
+        <div id="ct"><input id="msg" disabled><button id="send" disabled>send</button></div>
+        </div>
         <div id="remotes"></div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script src="../out/simplewebrtc-with-adapter.bundle.js"></script>
@@ -47,7 +54,31 @@
             
             
             
-            
+var addMSG = function(msg, who) {
+  var wrap = $("<div>").addClass("wrap").appendTo($("#chat-screen"));
+  var div  = $("<div>").addClass(who).appendTo(wrap);
+  $("<span>").html(who).addClass("who").appendTo(div);
+  $("<span>").html(msg).addClass("msg").appendTo(div);
+  $("#chat-screen-wp").scrollTop($("#chat-screen").height());
+}
+
+var sendMSG = function() {
+  var value = $("#msg").val();
+  if (value) {
+   // dc.send(value);
+      var payloadmsg = {
+        type: 'msg',
+        userid: '1234fg',
+        mag: value
+        };
+        webrtc.sendDirectlyToAll("gameData", "game", JSON.stringify(payloadmsg));
+    addMSG(value, "me");
+    $("#msg").val('');
+  }
+}
+
+$("#msg").keypress(function(e) {if(e.which == 13) {sendMSG()}});
+$("#send").click(sendMSG);
             
             
             // grab the room from the URL
@@ -77,16 +108,22 @@
     });
 } else {}
             
-            function senddatamsg(button) { 
-                console.log('senddatamsg', "senddatamsgdewd");
-                webrtc.sendDirectlyToAll("chat", "data", "test");
-            }
+        function senddatamsg(button) { 
+            console.log('senddatamsg', "senddatamsgdewd");
+
+                var payloadmsg = {
+                type: 'msg',
+                userid: '1234fg',
+                mag: 'test msg gp'
+                };
+                webrtc.sendDirectlyToAll("gameData", "game", JSON.stringify(payloadmsg));
+        }
             
             // called when a peer is created
-webrtc.on('createdPeer', function (peer) {
-    console.log('createdPeer', peer);
-//if (room) webrtc.joinRoom(room);
-});
+            webrtc.on('createdPeer', function (peer) {
+                console.log('createdPeer', peer);
+            //if (room) webrtc.joinRoom(room);
+            });
 
             // when it's ready, join if we got a room from the URL
             webrtc.on('readyToCall', function () {
@@ -108,8 +145,10 @@ webrtc.on('createdPeer', function (peer) {
                 if (data.type == 'volume') {
                     showVolume(document.getElementById('volume_' + peer.id), data.volume);
                 }
-                
-                console.log('data channel', data.type);
+                var datamsg = JSON.parse(data.payload);
+                console.log('data channel gp ', data.type+" - "+datamsg.type+" = "+datamsg.userid+" - "+datamsg.msg);
+                addMSG(datamsg.msg, "other");
+                //console.log('data channel', data.type);
             });
             webrtc.on('videoAdded', function (video, peer) {
                 console.log('video added', peer);
